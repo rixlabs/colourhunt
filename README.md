@@ -1,6 +1,17 @@
+![](./static/colourhunt.png)
+
 # colourhunt
 
 > Community Driven Website for Designers and Colour Lovers
+
+This repository is currently only for research & fun.
+
+### Tech used
+
+- Vue.js
+- Graph.cool
+- Vue-Apollo
+- Vue router
 
 ## Build Setup
 

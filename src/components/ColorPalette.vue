@@ -11,18 +11,17 @@
       </div>
     </router-link>
     <div class="Color-palette__meta">
-      <div class="Color-palette__upvotes">
-        {{ colorpalette.upvotes }}
-      </div>
+      <upvote-button :id="colorpalette.id" :upvotes="colorpalette.upvotes"></upvote-button>
     </div>
   </div>
 </template>
 
 <script>
   import ColorPreview from './ColorPreview'
+  import UpvoteButton from './UpvoteButton'
 
   export default {
-    components: { ColorPreview },
+    components: { ColorPreview, UpvoteButton },
     props: {
       colorpalette: {
         type: Object,
@@ -78,13 +77,10 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      padding: rem(20);
+      padding: rem(15);
     }
 
     @include has(upvotes) {
-      @include hover-active-states() {
-        background: gray;
-      }
     }
   }
 

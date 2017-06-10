@@ -6,10 +6,9 @@
       </div>
       <div class="Color-detail__content">
         <span v-if="loading > 0">
-          Loading...
+          <spinner />
         </span>
-        <h1>{{Palette.title}}</h1>
-
+        <h1 class="Color-detail__title">{{Palette.title}}</h1>
       </div>
     </div>
   </div>
@@ -18,6 +17,7 @@
 <script>
   import gql from 'graphql-tag'
   import ColorPreview from './ColorPreview'
+  import Spinner from './Spinner'
 
   const PaletteQuery = gql`
     query palette($id: ID!) {
@@ -30,7 +30,7 @@
   `
 
   export default {
-    components: { ColorPreview },
+    components: { ColorPreview, Spinner },
     data () {
       return {
         Palette: {},
@@ -66,6 +66,11 @@
 
     @include has(header) {
 
+    }
+
+    @include has(title) {
+      color: color(text-color);
+      font-size: rem(20);
     }
 
     @include has(content) {

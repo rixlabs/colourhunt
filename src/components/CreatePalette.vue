@@ -1,15 +1,18 @@
 <template>
   <div class="Content">
-    <h1>Create new Palette</h1>
-    <hr>
-    <input type="text" placeholder="Name your palette" name="title" v-model="title">
-    <input type="text" placeholder="Your colors" name="colors" v-model="colors" >
-
-    <button @click="create()">Create Palette</button>
+    <div class="Color-create">
+      <h1>Create new Palette</h1>
+      <hr>
+      <input type="text" placeholder="Name your palette" name="title" v-model="title">
+      <input type="text" placeholder="Your colors" name="colors" v-model="colors" >
+      <color-picker></color-picker>
+      <button @click="create()">Create Palette</button>
+    </div>
   </div>
 </template>
 
 <script>
+  import colorPicker from 'vue-sketch-color-picker'
   import gql from 'graphql-tag'
 
   const createPalette = gql`
@@ -22,7 +25,7 @@
     }
   `
   export default {
-    props: {},
+    components: { colorPicker },
     data () {
       return {
         title: '',
@@ -64,3 +67,25 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/styles/_variables.scss";
+
+  .Color-create {
+    background: color(background-light);
+    border-radius: $base-border-radius;
+    border: 1px solid color(border-color);
+    margin: rem(10);
+    margin-top: rem(50);
+    padding: rem(30);
+  }
+
+  input[type="text"] {
+    padding: rem(20);
+    background-color: #fff;
+    border: 1px solid color(border-color);
+    font-size: rem(16);
+    flex: 1;
+  }
+
+</style>

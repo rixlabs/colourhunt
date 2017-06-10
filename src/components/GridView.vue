@@ -2,7 +2,7 @@
   <div class="Content">
     <div class="Content__list">
       <template v-if="loading > 0">
-        Loading...
+        <spinner />
       </template>
       <template v-else>
         <color-palette v-for="palette in allPalettes" :key="palette.id" :colorpalette='palette'/>
@@ -14,11 +14,12 @@
 <script>
   import gql from 'graphql-tag'
   import ColorPalette from './ColorPalette'
+  import Spinner from './Spinner'
 
   // GraphQL query
   const FeedQuery = gql`
     query allPalettes {
-      allPalettes(orderBy: createdAt_DESC) {
+      allPalettes(orderBy: upvotes_DESC) {
         id
         title
         upvotes
@@ -27,7 +28,7 @@
     }
   `
   export default {
-    components: { ColorPalette },
+    components: { ColorPalette, Spinner },
     props: {},
     data () {
       return {

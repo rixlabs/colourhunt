@@ -4,7 +4,10 @@
       <router-link to="/">
         <h1 class="Header__logo">Colour Hunt</h1>
       </router-link>
-      <router-link to="create">Create</router-link>
+      <div class="Header__nav">
+        <router-link to="/create" class="button">Create</router-link>
+        <router-link to="/login" class="button">Login</router-link>
+      </div>
     </div>
   </header>
 </template>

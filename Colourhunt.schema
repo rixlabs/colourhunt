@@ -1,0 +1,25 @@
+﻿type File {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type Palette {
+  colors: [String!]!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  title: String
+  updatedAt: DateTime!
+  upvotes: Int
+}
+
+type User {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
