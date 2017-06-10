@@ -6,6 +6,10 @@
 
 This repository is currently only for research & fun.
 
+# 📺  Demo
+
+- 👉 https://apertureless.github.io/colourhunt/#/
+
 ### Tech used
 
 - Vue.js
