@@ -6,7 +6,7 @@ import VueApollo from 'vue-apollo'
 
 Vue.config.productionTip = false
 
-const networkInterface = createNetworkInterface({ uri: 'https://api.graph.cool/simple/v1/xxxxxxxxxxx' })
+const networkInterface = createNetworkInterface({ uri: 'https://api.graph.cool/simple/v1/cj23bdhqjezf401017zjz3w27' })
 
 const apolloClient = new ApolloClient({
   networkInterface
