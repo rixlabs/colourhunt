@@ -124,7 +124,7 @@ export default {
         })
     },
     addColor () {
-      this.swatches.push({color: '#000'})
+      this.swatches.push({color: '#f1f1f1'})
     },
     removeColor (index) {
       this.swatches.splice(index, 1)
