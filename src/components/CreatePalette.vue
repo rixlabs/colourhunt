@@ -7,14 +7,15 @@
       <input type="text" placeholder="Your colors" name="colors" v-model="colors" >
       <div class="Color__list">
         <swatch
-          v-for="swatch in swatches"
-          v-on:remove="removeColor"
-          v-on:picker="openPicker"
-          :color="pickerColors.hex" />
+          v-for="(swatch, index) in swatches"
+          v-on:remove="removeColor(index)"
+          v-on:picker="openPicker(index)"
+          :color="swatch.color" />
+
         <add-swatch v-if="addable" v-on:increment="addColor()"/>
         <chrome-picker v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker" />
       </div>
-      <button class="create" @click="create()">Create Palette</button>
+      <button class="button" @click="create()">Create Palette</button>
     </div>
   </div>
 </template>
@@ -65,6 +66,7 @@ export default {
   data () {
     return {
       title: '',
+      currentIndex: 0,
       colorCount: 4,
       showPicker: false,
       pickerColors: defaultProps,
@@ -82,6 +84,11 @@ export default {
     },
     addable () {
       return (this.swatches.length <= this.colorCount)
+    }
+  },
+  watch: {
+    'pickerColors': function (val) {
+      this.swatches[this.currentIndex].color = val.hex
     }
   },
   methods: {
@@ -123,7 +130,8 @@ export default {
     removeColor (index) {
       this.swatches.splice(index, 1)
     },
-    openPicker () {
+    openPicker (index) {
+      this.currentIndex = index
       this.showPicker = true
     },
     closePicker () {
