@@ -13,7 +13,7 @@
           :color="pickerColors.hex" />
         <add-swatch v-if="addable" v-on:increment="addColor()"/>
       </div>
-      <chrome-picker v-if="showPicker" v-model="pickerColors" /> 
+      <chrome-picker v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker" />
       <button class="create" @click="create()">Create Palette</button>
     </div>
   </div>
@@ -22,6 +22,7 @@
 <script>
 import gql from 'graphql-tag'
 import { Chrome as ChromePicker } from 'vue-color'
+import { mixin as clickaway } from 'vue-clickaway'
 import Swatch from './Swatch/ColorSwatch'
 import AddSwatch from './Swatch/AddSwatch'
 
@@ -59,6 +60,7 @@ const createPalette = gql`
   `
 
 export default {
+  mixins: [clickaway],
   components: { Swatch, AddSwatch, ChromePicker },
   data () {
     return {
@@ -123,6 +125,9 @@ export default {
     },
     openPicker () {
       this.showPicker = true
+    },
+    closePicker () {
+      this.showPicker = false
     }
   }
 
