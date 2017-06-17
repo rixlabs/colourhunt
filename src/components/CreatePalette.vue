@@ -4,7 +4,6 @@
       <h1>Create new Palette</h1>
       <hr>
       <input type="text" placeholder="Name your palette" name="title" v-model="title">
-      <input type="text" placeholder="Your colors" name="colors" v-model="colors" >
       <div class="Color__list">
         <swatch
           v-for="(swatch, index) in swatches"
