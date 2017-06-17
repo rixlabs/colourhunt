@@ -12,8 +12,8 @@
           v-on:picker="openPicker"
           :color="pickerColors.hex" />
         <add-swatch v-if="addable" v-on:increment="addColor()"/>
+        <chrome-picker v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker" />
       </div>
-      <chrome-picker v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker" />
       <button class="create" @click="create()">Create Palette</button>
     </div>
   </div>
