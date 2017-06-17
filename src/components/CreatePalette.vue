@@ -6,10 +6,14 @@
       <input type="text" placeholder="Name your palette" name="title" v-model="title">
       <input type="text" placeholder="Your colors" name="colors" v-model="colors" >
       <div class="Color__list">
-        <swatch v-for="swatch in swatches" v-on:remove="removeColor" :color="swatch.color"></swatch>
+        <swatch
+          v-for="swatch in swatches"
+          v-on:remove="removeColor"
+          v-on:picker="openPicker"
+          :color="pickerColors.hex" />
         <add-swatch v-if="addable" v-on:increment="addColor()"/>
       </div>
-
+      <chrome-picker v-if="showPicker" v-model="pickerColors" /> 
       <button class="create" @click="create()">Create Palette</button>
     </div>
   </div>
@@ -17,8 +21,32 @@
 
 <script>
 import gql from 'graphql-tag'
+import { Chrome as ChromePicker } from 'vue-color'
 import Swatch from './Swatch/ColorSwatch'
 import AddSwatch from './Swatch/AddSwatch'
+
+let defaultProps = {
+  hex: '#194d33',
+  hsl: {
+    h: 150,
+    s: 0.5,
+    l: 0.2,
+    a: 1
+  },
+  hsv: {
+    h: 150,
+    s: 0.66,
+    v: 0.30,
+    a: 1
+  },
+  rgba: {
+    r: 25,
+    g: 77,
+    b: 51,
+    a: 1
+  },
+  a: 1
+}
 
 const createPalette = gql`
     mutation createPalette($title: String!, $colors: [String!]) {
@@ -31,11 +59,13 @@ const createPalette = gql`
   `
 
 export default {
-  components: { Swatch, AddSwatch },
+  components: { Swatch, AddSwatch, ChromePicker },
   data () {
     return {
       title: '',
       colorCount: 4,
+      showPicker: false,
+      pickerColors: defaultProps,
       swatches: [{
         color: '#f1f1f1'
       }]
@@ -90,6 +120,9 @@ export default {
     },
     removeColor (index) {
       this.swatches.splice(index, 1)
+    },
+    openPicker () {
+      this.showPicker = true
     }
   }
 

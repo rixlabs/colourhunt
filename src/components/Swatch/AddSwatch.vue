@@ -8,7 +8,6 @@
   export default {
     methods: {
       add () {
-        console.log('add')
         this.$emit('increment')
       }
     }

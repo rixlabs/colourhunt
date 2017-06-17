@@ -1,5 +1,5 @@
 <template>
-  <div class="Swatch" v-bind:style="{backgroundColor: color}">
+  <div class="Swatch" v-bind:style="{backgroundColor: color}" @click="openPicker">
     <span class="close" @click="remove()">✖</span>
   </div>
 </template>
@@ -20,6 +20,9 @@
     methods: {
       remove () {
         this.$emit('remove')
+      },
+      openPicker () {
+        this.$emit('picker')
       }
     }
   }
@@ -41,6 +44,7 @@
     }
 
     .close {
+      margin: rem(5);
       display: none;
       justify-content: center;
       align-items: center;
@@ -49,6 +53,10 @@
       width: rem(30);
       height: rem(30);
       box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+
+      &:hover {
+        color: black;
+      }
     }
   }
 </style>
