@@ -23,7 +23,10 @@ export default {
     color: color(text-color);
     border: 1px solid color(border-color);
     padding: rem(10) rem(15);
+    background: color(background-light);
     border-radius: $base-border-radius;
+    appearance: none;
+    cursor: pointer;
 
     @include hover-active-states() {
       background: color(background-base);
