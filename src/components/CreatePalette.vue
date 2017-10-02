@@ -8,11 +8,13 @@
         <swatch
           v-for="(swatch, index) in swatches"
           v-on:remove="removeColor(index)"
-          v-on:picker="openPicker(index)"
+          v-on:picker="openPicker(index, $event)"
           :color="swatch.color" />
 
         <add-swatch v-if="addable" v-on:increment="addColor()"/>
-        <chrome-picker v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker" />
+        <chrome-picker class="Color__picker" v-if="showPicker" v-model="pickerColors" v-on-clickaway="closePicker"
+          v-bind:style="{ left: swatchOffset.left + 'px', top: swatchOffset.top + 'px' }"
+        />
       </div>
       <button class="button" @click="create()">Create Palette</button>
     </div>
@@ -69,6 +71,10 @@ export default {
       colorCount: 4,
       showPicker: false,
       pickerColors: defaultProps,
+      swatchOffset: {
+        left: 0,
+        top: 0
+      },
       swatches: [{
         color: '#f1f1f1'
       }]
@@ -129,9 +135,13 @@ export default {
     removeColor (index) {
       this.swatches.splice(index, 1)
     },
-    openPicker (index) {
+    openPicker (index, pos, event) {
       this.currentIndex = index
       this.showPicker = true
+      this.swatchOffset = {
+        left: pos.left,
+        top: pos.top
+      }
     },
     closePicker () {
       this.showPicker = false
@@ -165,9 +175,16 @@ export default {
     display: flex;
     flex-flow: row wrap;
     margin: 0 rem(-20);
+    position: relative;
+    overflow: visible;
     > * {
       margin: rem(20);
     }
+  }
+
+  .Color__picker {
+    position: absolute;
+    top: 0;
   }
 
 </style>
