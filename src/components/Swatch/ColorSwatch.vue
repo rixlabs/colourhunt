@@ -21,8 +21,11 @@
       remove () {
         this.$emit('remove')
       },
-      openPicker () {
-        this.$emit('picker')
+      openPicker (event) {
+        this.$emit('picker', {
+          left: this.$el.offsetLeft + this.$el.offsetWidth,
+          top: this.$el.offsetTop
+        }, event)
       }
     }
   }
